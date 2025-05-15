@@ -1,164 +1,144 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <title>AI云视Pro下载</title>
-    <meta
-      name="tencent-site-verification"
-      content="dfd98ab4bf7247dfee34e8dcf41ffff5"
-    />
-    <script src="/js/rem.js"></script>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        width: 100vw;
-      }
 
-      #androidDownload {
-        display: none;
-        height: 100%;
-        width: 100%;
-        background: url("/images/app/download-bg.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        text-align: center;
-        padding-top: 10vh;
-        padding-bottom: 1rem;
-        box-sizing: border-box;
-        overflow: auto;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <title>AI云视Pro下载</title>
+  <meta name="tencent-site-verification" content="dfd98ab4bf7247dfee34e8dcf41ffff5" />
+  <script src="/js/rem.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100vw;
+    }
 
-      .logo-image {
-        width: 15vw;
-        height: 15vw;
-      }
+    #androidDownload {
+      display: none;
+      height: 100%;
+      width: 100%;
+      background: url("/images/app/download-bg.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      text-align: center;
+      padding-top: 10vh;
+      padding-bottom: 1rem;
+      box-sizing: border-box;
+      overflow: auto;
+    }
 
-      .name {
-        margin-bottom: 2rem;
-      }
+    .logo-image {
+      width: 15vw;
+      height: 15vw;
+    }
 
-      .slogan {
-        font-size: 1.4rem;
-        margin-bottom: 0.4rem;
-      }
+    .name {
+      margin-bottom: 2rem;
+    }
 
-      .tip {
-        font-size: 0.8rem;
-      }
+    .slogan {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
 
-      #downloadBtn {
-        display: inline-block;
-        height: 3rem;
-        margin-top: 2rem;
-        /* margin-bottom: 1rem; */
-        border-radius: 1.5rem;
-        width: 50%;
-        line-height: 3rem;
-        background-color: rgb(20, 140, 245);
-        color: #fff;
-        text-decoration: none;
-      }
+    .tip {
+      font-size: 0.8rem;
+    }
 
-      .preview-image {
-        margin: 5vh 0;
-      }
+    #downloadBtn {
+      display: inline-block;
+      height: 3rem;
+      margin-top: 2rem;
+      /* margin-bottom: 1rem; */
+      border-radius: 1.5rem;
+      width: 50%;
+      line-height: 3rem;
+      background-color: rgb(20, 140, 245);
+      color: #fff;
+      text-decoration: none;
+    }
 
-      .footer {
-        font-size: 0.8rem;
-      }
+    .preview-image {
+      margin: 5vh 0;
+    }
 
-      #inWeixin {
-        width: 100%;
-        height: 100%;
-        display: none;
-        background-color: #333;
-      }
+    .footer {
+      font-size: 0.8rem;
+    }
 
-      .tip-image {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-      }
-    </style>
+    #inWeixin {
+      width: 100%;
+      height: 100%;
+      display: none;
+      background-color: #333;
+    }
 
-    <script type="text/javascript">
-      function formatDate(stamp) {
-        let str = new Date(stamp).toLocaleDateString();
-        str = str.replace(/\//g, "-");
-        return str;
-      }
+    .tip-image {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+    }
+  </style>
 
-      var u = navigator.userAgent;
-      // 获取终端的相关信息
-      var Terminal = {
-        // 辨别移动终端类型
-        platform: (function () {
-          app = navigator.appVersion;
-          return {
-            // android终端或者uc浏览器
-            android: u.indexOf("Android") > -1 || u.indexOf("Linux") > -1,
-            // 是否为iPhone或者QQHD浏览器
-            iPhone: u.indexOf("iPhone") > -1,
-            windows: u.indexOf("Windows") > -1,
-            // 是否iPad
-            iPad: u.indexOf("iPad") > -1,
-            weixin: u.indexOf("MicroMessenger") > -1,
-          };
-        })(),
-        // 辨别移动终端的语言：zh-cn、en-us、ko-kr、ja-jp...
-        language: (
-          navigator.browserLanguage || navigator.language
-        ).toLowerCase(),
-      };
+  <script type="text/javascript">
+    function formatDate(stamp) {
+      let str = new Date(stamp).toLocaleDateString();
+      str = str.replace(/\//g, "-");
+      return str;
+    }
 
-      window.onload = () => {
-        const inWeixin = document.getElementById("inWeixin");
-        const androidDownload = document.getElementById("androidDownload");
-        if (Terminal.platform.weixin) {
-          //微信端
-          inWeixin.style.display = "block";
-          androidDownload.style.display = "none";
-        } else {
-          inWeixin.style.display = "none";
-          androidDownload.style.display = "block";
-          // 根据不同的终端，跳转到不同的地址
-          let theUrl = "";
-          if (Terminal.platform.iPhone || Terminal.platform.iPad) {
-            //iPhone端
-            theUrl = "https://apps.apple.com/cn/app/id6483040302";
-            location.href = theUrl;
-            document.getElementById("downloadBtn").href = theUrl;
-            return;
-          }
-		  document.getElementById("downloadBtn").href = "/static/android/v1.0.0.apk";
-		  return ;// 先直接固定安卓下载地址。
-    </script>
-  </head>
-  <body>
-    <div id="banner_z"></div>
-    <div id="androidDownload">
-      <img src="/images/app/logo_pro.jpg" alt="" class="logo-image" />
-      <div class="name">AI云视Pro</div>
-      <div class="slogan">智能摄像机应用程序</div>
-      <div class="tip">支持实时查看、云端存储、智能侦测等功能</div>
-      <a id="downloadBtn" target="" href="#">立即下载</a>
-      <img
-        src="/images/app/download-preview.png"
-        alt=""
-        class="preview-image"
-      />
-      <div class="footer">
-        <div id="version">版本号: V1.0.0</div>
-        <div class="divider"></div>
-        <div id="date">发布日期:2025-05-16</div>
-        <!-- <div id="sensor">开发商: 南京生石花网络科技有限公司</div> -->
-      </div>
+    var u = navigator.userAgent;
+    // 获取终端的相关信息
+    var Terminal = {
+      // 辨别移动终端类型
+      platform: (function () {
+        app = navigator.appVersion;
+        return {
+          // android终端或者uc浏览器
+          android: u.indexOf("Android") > -1 || u.indexOf("Linux") > -1,
+          // 是否为iPhone或者QQHD浏览器
+          iPhone: u.indexOf("iPhone") > -1,
+          windows: u.indexOf("Windows") > -1,
+          // 是否iPad
+          iPad: u.indexOf("iPad") > -1,
+          weixin: u.indexOf("MicroMessenger") > -1,
+        };
+      })(),
+      // 辨别移动终端的语言：zh-cn、en-us、ko-kr、ja-jp...
+      language: (
+        navigator.browserLanguage || navigator.language
+      ).toLowerCase(),
+    };
+
+    window.onload = () => {
+      const androidDownload = document.getElementById("androidDownload");
+      androidDownload.style.display = "block";
+      document.getElementById("downloadBtn").href = "/static/android/v1.0.0.apk";
+      return;// 先直接固定安卓下载地址。
+    }
+  </script>
+</head>
+
+<body>
+  <div id="banner_z"></div>
+  <div id="androidDownload">
+    <img src="/images/app/logo_pro.jpg" alt="" class="logo-image" />
+    <div class="name">AI云视Pro</div>
+    <div class="slogan">智能摄像机应用程序</div>
+    <div class="tip">支持实时查看、云端存储、智能侦测等功能</div>
+    <a id="downloadBtn" target="" href="#">立即下载</a>
+    <img src="/images/app/download-preview.png" alt="" class="preview-image" />
+    <div class="footer">
+      <div id="version">版本号: V1.0.0</div>
+      <div class="divider"></div>
+      <div id="date">发布日期:2025-05-16</div>
     </div>
-    <div id="inWeixin">
-      <img src="/images/app/weixin-tip.png" alt="" class="tip-image" />
-    </div>
-  </body>
+  </div>
+  <div id="inWeixin">
+    <img src="/images/app/weixin-tip.png" alt="" class="tip-image" />
+  </div>
+</body>
+
 </html>
