@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>AI云视Pro下载</title>
-  <meta name="tencent-site-verification" content="dfd98ab4bf7247dfee34e8dcf41ffff5" />
   <script src="/js/rem.js"></script>
   <style>
     body {
@@ -61,7 +60,7 @@
 
     .preview-image {
       margin: 5vh 0;
-	  max-width:660px;
+      max-width: 660px;
     }
 
     .footer {
@@ -130,6 +129,7 @@
     <div class="slogan">智能摄像机应用程序</div>
     <div class="tip">支持实时查看、云端存储、智能侦测等功能</div>
     <a id="downloadBtn" target="" href="#">立即下载</a>
+    <div id="containerAdId"></div>
     <img src="/images/app/download-preview2.png" alt="" class="preview-image" />
     <div class="footer">
       <div id="version">版本号: V1.0.0</div>
@@ -140,6 +140,34 @@
   <div id="inWeixin">
     <img src="/images/app/weixin-tip.png" alt="" class="tip-image" />
   </div>
+
+  <script>
+    class AdLoader {
+      initAd(url) {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = url;
+          script.onload = () => resolve();
+          script.onerror = () => reject(new Error(`Script load error: ${url}`));
+          document.head.append(script);
+        });
+      }
+
+      loadAds() {
+        this.initAd("https://d.adsplus.com.cn/adsplus2.1.js?appid=adp-h5-999999")
+          .then(() => {
+            //等js加载成功之后再去加载广告
+            loadFeedAd(null, "containerAdId", null);
+          })
+          .catch(error => console.error(error));
+      }
+    }
+    const adLoader = new AdLoader();
+    adLoader.loadAds();
+  </script>
+
+
+
 </body>
 
 </html>
